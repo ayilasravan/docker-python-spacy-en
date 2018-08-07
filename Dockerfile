@@ -1,5 +1,11 @@
-FROM python:2.7.15-alpine
+FROM python:2.7.15-slim
 
-RUN apt-get install gcc
+RUN apt-get update
 
-RUN pip install spacy==2.0.9 Flask==0.12.2 Flask-Cors==3.0.3 Flask-HTTPAuth==3.1.2 Flask-RESTful==0.3.6 Flask-SQLAlchemy==2.3.2
+RUN apt-get -y install build-essential
+
+WORKDIR /app
+
+COPY ./requirements.txt ./
+
+RUN pip install -r requirements.txt
